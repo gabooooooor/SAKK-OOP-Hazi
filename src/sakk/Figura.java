@@ -24,4 +24,18 @@ public abstract class Figura {
     
     //Character of the piece, e.g. 'K'; the colour is not part of it
     public abstract char jel();
+    
+    //Shared sliding movement: straight/diagonal line, path must be free, target not own piece
+    protected boolean csuszik(Mezo honnan, Mezo hova, Tabla t, boolean egyenes, boolean atlos)
+    {
+        int dO = hova.getOszlop() - honnan.getOszlop();
+        int dS = hova.getSor() - honnan.getSor();
+        if(dO == 0 && dS == 0) { return false; }
+        boolean isEgyenes = (dO == 0 || dS == 0);
+        boolean isAtlos = (Math.abs(dO) == Math.abs(dS));
+        if(!(egyenes && isEgyenes) && !(atlos && isAtlos)) { return false; }
+        if(t.utbanVan(honnan, hova)) { return false; }
+        Figura cel = t.figura(hova);
+        return cel == null || cel.getSzin() != getSzin();
+    }
 }
