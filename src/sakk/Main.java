@@ -84,7 +84,8 @@ public class Main {
         String feher = "\u2654\u2655\u2656\u2657\u2658\u2659";   // K Q R B N P
         String fekete = "\u265A\u265B\u265C\u265D\u265E\u265F";
         int index = "KQRBNP".indexOf(Character.toUpperCase(f.jel()));
-        String keszlet = (f.getSzin() == Szin.FEHER) ? feher : fekete;
+        // On a dark terminal the filled symbols look white, so the sets are swapped
+        String keszlet = (f.getSzin() == Szin.FEHER) ? fekete : feher;
         return String.valueOf(keszlet.charAt(index));
     }
 }
