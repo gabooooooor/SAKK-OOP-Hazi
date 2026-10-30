@@ -4,10 +4,24 @@
  */
 package sakk;
 
-/**
- *
- * @author ministar
- */
-public class Huszar {
-    
+public class Huszar extends Figura {
+
+    private static final int[][] ELTOLASOK = {
+        {1, 2}, {2, 1}, {-1, 2}, {-2, 1},
+        {1, -2}, {2, -1}, {-1, -2}, {-2, -1}
+    };
+
+    public Huszar(Szin szin) {
+        super(szin);
+    }
+
+    @Override
+    public boolean lephet(Mezo honnan, Mezo hova, Tabla t) {
+        return fixLepes(honnan, hova, t, ELTOLASOK);
+    }
+
+    @Override
+    public char jel() {
+        return 'N';
+    }
 }
